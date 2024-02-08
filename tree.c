@@ -8,11 +8,24 @@ typedef struct tree{
     int size;
 }tree;
 
+typedef struct stack{
+    int top;
+    int size;
+    int* array;
+}stack;
+
 tree initBST(tree R, int length){
     R.root = (int*)malloc(sizeof(int)*length);
     R.size = length;
     return R;
 }
+
+void initStack(stack* S, int length){
+    S->top = -1;
+    S->size = length;
+    S->array = (int*)malloc(sizeof(int)*length);
+}
+
 
 tree insertBST(tree R, int data){
     int idx = 0;
@@ -67,15 +80,91 @@ void isComplete(tree R){
         }
     }
 }
+
+int isFull(stack S){
+    return(S.top == S.size);
+}
+int isEmpty(stack S){
+    return(S.top == -1);
+}
+
+void push(stack* S, int index){
+    if(isFull(*S))
+        return;
+    S->top += 1;
+    S->array[S->top] = index;
+    return;
+}
+
+int pop(stack* S){
+    if(isEmpty(*S))
+        return 0;
+    int p = S->array[S->top];
+    S->top -= 1;
+    return p;
+}
+void inorder(tree R){
+    stack store;
+    initStack(&store, R.size);
+    int flag = 1;
+    int p = 0;
+    while(flag){
+        if(p < R.size){
+            // printf("value being pushed:%d \n", p);
+            push(&store, p);
+            p = 2*p + 1;
+            // printf("new index: %d\n", p);
+        }
+        
+        else{
+           if(!isEmpty(store)){
+            p = pop(&store);
+            // printf("value being popped: %d\n", p);
+            printf("%d ", R.root[p]);
+            p = 2*p + 2;
+           }
+           else{
+               flag = 0;
+           }
+           
+        }
+    }
+}
+
+// check again for debugging
+void preorder(tree R){
+    stack a, b;
+    int p = 0;
+    initStack(&a, R.size);
+    initStack(&b, R.size);
+    push(&a, p);
+    printf("outside while loop\n");
+    while(!isEmpty(a)){
+        printf("inside while loop\n");
+        printf("value of p:%d", p);
+        p = pop(&a);
+        push(&a, p);
+        if(R.root[2*p+1] != 0 && 2*p+1 <= R.size){
+            push(&a, 2*p+1);
+        }
+        if(R.root[2*p+2] != 0 && 2*p+2 <= R.size){
+            push(&a, 2*p+2);
+        }
+    }
+    while(!isEmpty(b)){
+        printf("%d ",R.root[pop(&b)]);
+    }
+}
+
 int main() {
 
     tree T1;
     T1 = initBST(T1, 7);
- printf("size of tree: %d\n", T1.size);
-//  printf("default contents of array:");
-//  for(int i = 0; i < T1.size; i++){
-//      printf("%d ", T1.root[i]);
-//  }
+    printf("size of tree: %d\n", T1.size);
+    //  printf("default contents of array:");
+    //  for(int i = 0; i < T1.size; i++){
+    //      printf("%d ", T1.root[i]);
+    //  }
     T1 = insertBST(T1, 20);
     T1 = insertBST(T1, 30);
     T1 = insertBST(T1, 40);
@@ -85,6 +174,12 @@ int main() {
     T1 = insertBST(T1, 5);
     levelwise(T1);
     isComplete(T1);
+
+    // inorder traversal
+    printf("Inorder travesal(non-recursive)\n");
+    inorder(T1);
+    printf("\nPreorder travesal(non-recursive)\n");   
+    preorder(T1);
     
  
     return 0;
