@@ -5,28 +5,57 @@ int main() {
     tree T1;
     T1 = initBST(T1, 7);
     printf("size of tree: %d\n", T1.size);
-    
-    //  printf("default contents of array:");
-    //  for(int i = 0; i < T1.size; i++){
-    //      printf("%d ", T1.root[i]);
-    //  }
 
-    T1 = insertBST(T1, 20);
-    T1 = insertBST(T1, 30);
-    T1 = insertBST(T1, 40);
-    T1 = insertBST(T1, 25);
-    T1 = insertBST(T1, 10);
-    T1 = insertBST(T1, 15);
-    T1 = insertBST(T1, 5);
-    levelwise(T1);
-    isComplete(T1);
+    int choice, data;
+    do {
+        printf("\nMenu:\n");
+        printf("1. Insert into BST\n");
+        printf("2. Recursive Inorder Traversal\n");
+        printf("3. Recursive Preorder Traversal\n");
+        printf("4. Recursive Postorder Traversal\n");
+        printf("5. Level-wise Traversal\n");
+        printf("6. Check if BST is Complete\n");
+        printf("7. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-    // inorder traversal
-    printf("Inorder travesal(non-recursive)\n");
-    inorder(T1);
-    printf("\nPreorder travesal(non-recursive)\n");   
-    preorder(T1);
-    
+        switch(choice) {
+            case 1:
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                T1 = insertBST(T1, data);
+                break;
+            case 2:
+                printf("Inorder Traversal: ");
+                inorder(T1);
+                printf("\n");
+                break;
+            case 3:
+                printf("Preorder Traversal: ");
+                preorder(T1);
+                printf("\n");
+                break;
+            case 4:
+                printf("Postorder Traversal: ");
+                postorder(T1);
+                printf("\n");
+                break;
+            case 5:
+                printf("Level-wise Traversal: ");
+                levelwise(T1);
+                printf("\n");
+                break;
+            case 6:
+                isComplete(T1);
+                break;
+            case 7:
+                free(T1.root);
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice! Please enter a number between 1 and 7.\n");
+        }
+    } while(choice != 7);
  
     return 0;
 }

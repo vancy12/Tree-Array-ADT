@@ -88,6 +88,7 @@ int pop(stack* S){
         return 0;
     int p = S->array[S->top];
     S->top -= 1;
+    // printf("Value of top is:%d", S->top);
     return p;
 }
 void inorder(tree R){
@@ -118,19 +119,19 @@ void inorder(tree R){
     }
 }
 
-// check again for debugging
-void preorder(tree R){
+void postorder(tree R){
     stack a, b;
     int p = 0;
     initStack(&a, R.size);
     initStack(&b, R.size);
     push(&a, p);
-    printf("outside while loop\n");
+    // printf("outside while loop\n");
     while(!isEmpty(a)){
-        printf("inside while loop\n");
-        printf("value of p:%d", p);
+        // printf("inside while loop\n");
+        // printf("value of p:%d", p);
         p = pop(&a);
-        push(&a, p);
+        // a.top --;
+        push(&b, p);
         if(R.root[2*p+1] != 0 && 2*p+1 <= R.size){
             push(&a, 2*p+1);
         }
@@ -142,3 +143,25 @@ void preorder(tree R){
         printf("%d ",R.root[pop(&b)]);
     }
 }
+
+void preorder(tree R) {
+    stack a;
+    // root node --> index is 0
+    int p = 0;
+    initStack(&a, R.size);
+    push(&a, p);
+    
+    while(!isEmpty(a)){
+        p = pop(&a);
+        if(R.root[p] != 0) {
+            printf("%d ", R.root[p]); // Visit current node
+            // Push right child first
+            if(R.root[2*p+2] != 0 && 2*p+2 < R.size)
+                push(&a, 2*p+2);
+            // Push left child
+            if(R.root[2*p+1] != 0 && 2*p+1 < R.size)
+                push(&a, 2*p+1);
+        }
+    }
+}
+
