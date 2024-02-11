@@ -6,6 +6,14 @@ int main() {
     T1 = initBST(T1, 7);
     printf("size of tree: %d\n", T1.size);
 
+    // T1 = insertBST(T1, 20);
+    // T1 = insertBST(T1, 30);
+    // T1 = insertBST(T1, 40);
+    // T1 = insertBST(T1, 25);
+    // T1 = insertBST(T1, 10);
+    // T1 = insertBST(T1, 15);
+    // T1 = insertBST(T1, 5);
+    
     int choice, data;
     do {
         printf("\nMenu:\n");
