@@ -22,7 +22,7 @@ int main() {
         printf("3. Non-Recursive Preorder Traversal\n");
         printf("4. Non-Recursive Postorder Traversal\n");
         printf("5. Level-wise Traversal\n");
-        printf("6. Check if BST is Complete\n");
+        printf("6. Check if BST is Complete\n"); 
         printf("7. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);

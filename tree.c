@@ -99,6 +99,7 @@ void inorder(tree R){
     while(flag){
         if(p < R.size){
             // printf("value being pushed:%d \n", p);
+            // push and go to the left child
             push(&store, p);
             p = 2*p + 1;
             // printf("new index: %d\n", p);
@@ -106,6 +107,8 @@ void inorder(tree R){
         
         else{
            if(!isEmpty(store)){
+            // pop-->print-->go to right child
+
             p = pop(&store);
             // printf("value being popped: %d\n", p);
             printf("%d ", R.root[p]);
@@ -132,9 +135,12 @@ void postorder(tree R){
         p = pop(&a);
         // a.top --;
         push(&b, p);
+
+        // left child
         if(R.root[2*p+1] != 0 && 2*p+1 <= R.size){
             push(&a, 2*p+1);
         }
+        // right child
         if(R.root[2*p+2] != 0 && 2*p+2 <= R.size){
             push(&a, 2*p+2);
         }
