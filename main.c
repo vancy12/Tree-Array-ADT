@@ -18,9 +18,9 @@ int main() {
     do {
         printf("\nMenu:\n");
         printf("1. Insert into BST\n");
-        printf("2. Recursive Inorder Traversal\n");
-        printf("3. Recursive Preorder Traversal\n");
-        printf("4. Recursive Postorder Traversal\n");
+        printf("2. Non-Recursive Inorder Traversal\n");
+        printf("3. Non-Recursive Preorder Traversal\n");
+        printf("4. Non-Recursive Postorder Traversal\n");
         printf("5. Level-wise Traversal\n");
         printf("6. Check if BST is Complete\n");
         printf("7. Exit\n");
